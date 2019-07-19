@@ -5,13 +5,13 @@ import { Link, graphql } from 'gatsby'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-export const IndexPageTemplate = ({ title, heading, description, src, alt, html }) => (
+export const IndexPageTemplate = ({ title, heading, description, src, alt, content }) => (
   <Layout>
     <SEO title={title} />
     <h1>{heading}</h1>
     <p>{description}</p>
     <img src={src} alt={alt} />
-    <div dangerouslySetInnerHTML={{ __html: html }} />
+    <div dangerouslySetInnerHTML={{ __html: content }} />
     <Link to="/blog/">>> Go to blog page</Link>
   </Layout>
 )
@@ -29,7 +29,7 @@ const IndexPage = ({ data }) => {
       description={intro.description}
       src={image.src}
       alt={image.alt}
-      html={html}
+      content={html}
     />
   )
 }
