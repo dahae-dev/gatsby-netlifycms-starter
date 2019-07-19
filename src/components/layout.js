@@ -8,16 +8,10 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import styled from "styled-components"
+import { Container } from "react-bootstrap"
 
 import Header from "./header"
 import Footer from "./footer"
-
-const Container = styled.div`
-  margin: 0 auto;
-  max-width: 960px;
-  padding: 0px 1.0875rem 1.45rem;
-`
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
