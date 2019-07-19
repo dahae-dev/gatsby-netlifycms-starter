@@ -5,23 +5,31 @@ import { Link, graphql } from 'gatsby'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-export const IndexPageTemplate = ({ heading, intro }) => (
+export const IndexPageTemplate = ({ title, heading, description, src, alt, html }) => (
   <Layout>
-    <SEO title="Home" />
+    <SEO title={title} />
     <h1>{heading}</h1>
-    <p>{intro.heading}</p>
-    <p>{intro.description}</p>
+    <p>{description}</p>
+    <img src={src} alt={alt} />
+    <div dangerouslySetInnerHTML={{ __html: html }} />
     <Link to="/blog/">>> Go to blog page</Link>
   </Layout>
 )
 
 const IndexPage = ({ data }) => {
-  const { frontmatter } = data.markdownRemark
+  const { title: siteTitle } = data.site.siteMetadata
+  const { frontmatter, html } = data.markdownRemark
+  const { title, intro, image } = frontmatter
+  const editedTitle = `${title} - ${siteTitle}`
 
   return (
     <IndexPageTemplate
-      heading={frontmatter.heading}
-      intro={frontmatter.intro}
+      title={editedTitle}
+      heading={intro.heading}
+      description={intro.description}
+      src={image.src}
+      alt={image.alt}
+      html={html}
     />
   )
 }
@@ -38,12 +46,22 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query IndexPageTemplate {
+    site {
+      siteMetadata {
+        title
+      }
+    }
     markdownRemark(frontmatter: { templateKey: { eq: "index-page" } }) {
+      html
       frontmatter {
-        heading
+        title
         intro {
           heading
           description
+        }
+        image {
+          src 
+          alt
         }
       }
     }

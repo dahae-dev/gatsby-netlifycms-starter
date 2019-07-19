@@ -33,12 +33,12 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
-          {
-            resolve: `gatsby-remark-relative-images`,
-            options: {
-              name: `uploads`,
-            },
-          },
+          // {
+          //   resolve: `gatsby-remark-relative-images`,
+          //   options: {
+          //     name: `uploads`,
+          //   },
+          // },
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -67,7 +67,7 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
     {
-      resolve: 'gatsby-plugin-netlify-cms',
+      resolve: `gatsby-plugin-netlify-cms`,
       options: {
         modulePath: `${__dirname}/src/cms/cms.js`,
       },
